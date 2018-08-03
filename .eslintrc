@@ -1,0 +1,77 @@
+{
+  "env": {
+      "browser": true,
+      "es6": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "globals": {
+    "chrome": true
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": "warn",
+    "no-empty-function": "error",
+    "brace-style": "error",
+    "spaced-comment": "error",
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "eol-last": "error",
+    "no-useless-escape": "off",
+    "block-spacing": "error",
+    "array-bracket-spacing": "error",
+    "computed-property-spacing": "error",
+    "func-call-spacing": "error",
+    "keyword-spacing": "error",
+    "semi-spacing": "error",
+    "comma-spacing": "error",
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "space-in-parens": "error",
+    "space-unary-ops": [
+      2,
+      {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "space-infix-ops": ["error", { "int32Hint": false }],
+    "arrow-spacing": "error",
+    "no-var": "error",
+    "no-duplicate-imports": "error"
+  }
+}

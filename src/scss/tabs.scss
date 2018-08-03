@@ -1,0 +1,85 @@
+$tabs-width: 600px;
+$tabs-transition: .35s cubic-bezier(0, 0, 0.2, 1);
+$tabs-color-primary: #4285f4;
+
+.tabs {
+  max-width: $tabs-width;
+  margin: auto;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  * {
+    box-sizing: border-box;
+  }
+}
+.tabs__bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset 0 -5px 5px -3px rgba(0,0,0,0.05);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @media (min-width: 480px) {
+    min-width: auto;
+    overflow: hidden;
+  }
+}
+.tabs__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background-color: $tabs-color-primary;
+  will-change: transform;
+}
+.tabs__controls {
+  flex: 1 0 auto;
+  min-width: 150px;
+  display: block;
+  padding: 20px 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  &.is-active {
+    color: $tabs-color-primary;
+  }
+
+  @media (min-width: 480px) {
+    min-width: auto;
+  }
+}
+
+.tabs__controls:hover {
+  background-color: rgba(0,0,0,.03);
+}
+.tabs__controls:active {
+  user-select: none;
+}
+
+.tabs__content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: calc(#{$tabs-width} * 3);
+  overflow: hidden;
+  background-color: #fff;
+  will-change: transform, height;
+}
+.tabs__content.has-grab {
+  cursor: w-resize;
+  cursor: -webkit-grabbing;
+}
+
+.tabs__section {
+  padding: 30px;
+  width: $tabs-width;
+}

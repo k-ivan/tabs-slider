@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/tabs.css">
+  <title>Document</title>
+  <style>
+    body {
+      padding-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tabs">
+    <div class="tabs__bar">
+      <div class="tabs__controls md-ripple">View</div>
+      <div class="tabs__controls md-ripple">General</div>
+      <div class="tabs__controls md-ripple">Advanced</div>
+    </div>
+
+    <div class="tabs__content">
+      <div class="tabs__section">
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam amet veniam sed saepe, voluptates debitis odio beatae excepturi impedit? Minus.</div>
+      </div>
+      <div class="tabs__section">
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eos, iusto laboriosam voluptatem at reiciendis vel, facilis repellendus totam excepturi earum saepe rerum ullam! Placeat ducimus, sapiente impedit autem minus aperiam tempora? Magnam aliquam explicabo vitae! Odit minima quaerat ullam molestiae quae, nobis at. Molestiae consectetur libero dolore at officiis.</div>
+      </div>
+      <div class="tabs__section"><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus in et amet nemo laudantium quo vitae quaerat accusantium quam. Nam dolorem consequuntur impedit corrupti provident sed iure. A dicta quaerat reiciendis voluptatum enim vel, cupiditate, ex nulla omnis doloribus labore delectus itaque qui? Eos accusamus totam dolorem unde reiciendis cupiditate suscipit, veritatis cum blanditiis. Tempore provident perspiciatis itaque sed ducimus totam similique facilis quia, harum nesciunt cumque reiciendis nihil delectus expedita hic exercitationem dicta eius cupiditate, suscipit possimus. Quisquam perferendis tempore suscipit, voluptate numquam voluptatem ducimus nam officiis aliquam aspernatur commodi, laborum architecto atque soluta, repellat asperiores delectus accusantium veniam.</div></div>
+    </div>
+  </div>
+
+  <script src="js/tabsSlider.js"></script>
+  <script>
+    var opts = {
+      draggable: true,
+      slide: 1,
+    };
+
+    var elem = document.querySelector('.tabs');
+    elem.addEventListener('tabChange', function(evt) {
+      console.log(evt.detail);
+    })
+    var tabs = new TabsSlider(elem, opts);
+  </script>
+</body>
+</html>
