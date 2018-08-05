@@ -22,7 +22,7 @@ export default class TabsSlider {
     if (!this.tabs || this.tabs.activated) return;
 
     this.tabs.activated = true;
-    this.tabs.setAttribute('data-tabs-js', '');
+    this.tabs.setAttribute('data-tabs-active', '');
 
     this.settings = Object.assign({
       animate: true,
@@ -284,6 +284,7 @@ export default class TabsSlider {
 
     this.controls[this.currentId].classList.remove('is-active');
 
+    const prevIndex = this.currentId;
     this.currentId = slide;
     this.offset = -(this.w * this.currentId);
     this._moveSlide(this.offset);
@@ -291,9 +292,10 @@ export default class TabsSlider {
 
     const event = document.createEvent('CustomEvent');
     event.initCustomEvent('tabChange', true, true, {
-      slideIndex: this.currentId,
-      slideEl: this.sections[this.currentId],
-      tabEl: this.controls[this.currentId]
+      currentIndex: this.currentId,
+      prevIndex: prevIndex,
+      currentSlide: this.sections[this.currentId],
+      currentTab: this.controls[this.currentId]
     });
     this.tabs.dispatchEvent(event);
   }
