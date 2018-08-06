@@ -34,6 +34,14 @@ Add the plugin to the page
 ```html
 <script src="js/tabsSlider.js"></script>
 ```
+or if you are using a module bundler
+```sh
+npm i tabs-slider
+```
+```js
+import TabsSlider from 'TabsSlider';
+```
+
 And now the hardest part is to initialize our plugin )
 ```js
 new TabsSlider('.tabs');
@@ -53,28 +61,28 @@ new TabsSlider(elem, {
 });
 
 ```
-**`elem`** (string | HTMLElement)  
+`elem` (string | HTMLElement)  
   selector or element
 
-**`animate`** (bool)  
+`animate` (bool)  
   animated tabs switching
 
-**`slide`** (integer)  
+`slide` (integer)  
   initial slide
 
-**`draggable`** (bool)  
+`draggable` (bool)  
   mouse or touch events
 
-**`underline`**  (bool)  
+`underline`  (bool)  
   active tab underline
 
-**`heightAnimate`**  (bool)  
+`heightAnimate`  (bool)  
   height animation, only if the animation option is true
 
-**`duration`** (integer)  
+`duration` (integer)  
   animation time, only if the animation option is true
 
-**`easing`** (string)
+`easing` (string)
 
 ## Public methods
 Public methods for working with the plugin

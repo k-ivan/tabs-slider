@@ -1,17 +1,24 @@
 {
-  "name": "tabs",
+  "name": "tabs-slider",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Easy to use tabs slider, written in pure JavaScript.",
+  "main": "dist/js/tabsSlider.js",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
     "start": "webpack-dev-server --inline --progress --mode development --open"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-ivan/tabs-slider.git"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "k-ivan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k-ivan/tabs-slider/issues"
+  },
   "devDependencies": {
     "autoprefixer": "^9.0.2",
     "babel-core": "^6.26.3",
