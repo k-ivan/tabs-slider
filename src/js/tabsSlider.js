@@ -174,8 +174,8 @@ export default class TabsSlider {
     const target = e.target.closest('.tabs__controls');
     if (!target) return;
 
+    e.preventDefault();
     const slideId = this.controls.indexOf(target);
-
     if (slideId === this.currentId) return;
 
     this.show(slideId);
