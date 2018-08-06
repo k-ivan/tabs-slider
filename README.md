@@ -16,16 +16,21 @@ Or If you use SASS, you can import a sass source
 We also need a simple markup
 ```html
 <div class="tabs">
+  <div class="tabs__bar">
+    <div class="tabs__controls">View</div>
+    <div class="tabs__controls">General</div>
+    <div class="tabs__controls">Advanced</div>
+  </div>
   <div class="tabs__content">
     <div class="tabs__section">
-      I'm the first tab
+      I'm the first tab View
     </div>
     <div class="tabs__section">
-      second tab - more text<br>
+      second tab - General<br>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eos, iusto laboriosam voluptatem at reiciendis vel, facilis repellendus totam excepturi earum saepe rerum ullam!
     </div>
     <div class="tabs__section">
-      Welcome to third tab
+      Welcome to third tab - Advanced
     </div>
   </div>
 </div>
@@ -39,7 +44,7 @@ or if you are using a module bundler
 npm i tabs-slider
 ```
 ```js
-import TabsSlider from 'TabsSlider';
+import TabsSlider from 'tabs-slider';
 ```
 
 And now the hardest part is to initialize our plugin )
