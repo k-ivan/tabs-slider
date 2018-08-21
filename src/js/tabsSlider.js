@@ -215,7 +215,6 @@ export default class TabsSlider {
       drag = e.targetTouches[0];
     } else {
       drag = e;
-      e.preventDefault();
     }
 
     this.delta = 0;
