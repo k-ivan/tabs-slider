@@ -71,25 +71,25 @@ new TabsSlider(elem, {
 });
 
 ```
-`elem` (string | HTMLElement)  
+`elem` (string | HTMLElement)
   selector or element
 
-`animate` (bool)  
+`animate` (bool)
   animated tabs switching
 
-`slide` (integer)  
+`slide` (integer)
   initial slide
 
-`draggable` (bool)  
+`draggable` (bool)
   mouse or touch events
 
-`underline`  (bool)  
+`underline`  (bool)
   active tab underline
 
-`heightAnimate`  (bool)  
+`heightAnimate`  (bool)
   height animation, only if the animation option is true
 
-`duration` (integer)  
+`duration` (integer)
   animation time, only if the animation option is true
 
 `easing` (string)
@@ -99,6 +99,9 @@ Public methods for working with the plugin
 
 ### `.show(index)`
 This method allows you to programmatically navigate to the specified index to the slide.
+
+### `.recalcStyles()`
+This method allows you to recalculate styles, if a block with tabs was hidden or content was loaded into tabs.
 
 ### `.destroy()`
 This method stops the plugin. To reinitialize, you need to call the constructor again.

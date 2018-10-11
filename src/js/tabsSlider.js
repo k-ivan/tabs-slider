@@ -273,6 +273,10 @@ export default class TabsSlider {
     }
   }
 
+  recalcStyles() {
+    this._responsive();
+  }
+
   show(slide) {
     slide = Math.abs(slide);
 
