@@ -132,23 +132,22 @@ export default class TabsSlider {
       'className': 'tabs__line'
     });
 
-    if (this.settings.animate) {
-      // eslint-disable-next-line max-len
-      this.line.style[this.transitionProperty] = `${this.transformProperty} ${this.settings.duration}ms ${this.settings.easing}`;
-    }
 
     this.bar.appendChild(this.line);
     this._moveSliderLine();
+    if (this.settings.animate) {
+      // eslint-disable-next-line max-len
+      this.line.style[this.transitionProperty] = `
+        ${this.transformProperty} ${this.settings.duration}ms ${this.settings.easing}
+      `;
+    }
   }
 
   _moveSliderLine() {
     const {offsetWidth, offsetLeft} = this.controls[this.currentId];
 
     let transformLine = (this.has3d) ? `translate3d(${offsetLeft}px, 0, 0)` : `translateX(${offsetLeft}px)`;
-    this.line.style.cssText += `
-      width: ${offsetWidth}px;
-      transform: ${transformLine};
-    `;
+    this.line.style.transform = `${transformLine} scaleX(${offsetWidth / this.w})`;
   }
 
   _dimmensions() {

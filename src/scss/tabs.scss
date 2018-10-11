@@ -35,6 +35,7 @@ $tabs-color-primary: #4285f4;
   height: 3px;
   background-color: $tabs-color-primary;
   will-change: transform;
+  transform-origin: left;
 }
 .tabs__controls {
   flex: 1 0 auto;
