@@ -28,7 +28,9 @@
   bottom: 0;
   height: 3px;
   background-color: #4285f4;
-  will-change: transform; }
+  will-change: transform;
+  -webkit-transform-origin: left;
+          transform-origin: left; }
 
 .tabs__controls {
   flex: 1 0 auto;
