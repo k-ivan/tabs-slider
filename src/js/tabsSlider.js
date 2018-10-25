@@ -97,7 +97,11 @@ export default class TabsSlider {
   _addEvents() {
     this.handlerClick = this._selectTab.bind(this);
     this.handlerResize = this._responsive.bind(this);
+    this._handlerTabFocus = this._handlerTabFocus.bind(this);
+
     this.bar.addEventListener('click', this.handlerClick);
+    // Tab key focus inside slides
+    this.content.addEventListener('focus', this._handlerTabFocus, true);
     window.addEventListener('resize', this.handlerResize);
 
     if (this.settings.draggable) {
@@ -116,6 +120,7 @@ export default class TabsSlider {
 
   _removeEvents() {
     this.bar.removeEventListener('click', this.handlerClick);
+    this.content.removeEventListener('focus', this._handlerTabFocus, true);
     window.removeEventListener('resize', this.handlerResize);
 
     if (this.settings.draggable) {
@@ -125,6 +130,25 @@ export default class TabsSlider {
       this.content.removeEventListener(dragEvent.end, this.handlerEnd);
       this.content.removeEventListener(dragEvent.leave, this.handlerLeave);
     }
+  }
+
+  // Tab key breaks slider
+  // thx Oleg Korsunsky
+  // https://wd.dizaina.net/en/internet-maintenance/js-sliders-and-the-tab-key/
+  _handlerTabFocus(e) {
+    const section = e.target.closest('.tabs__section');
+    if (!section) return;
+
+    this.tabs.scrollLeft = 0;
+    this.content.scrollTop = 0;
+
+    setTimeout(() => {
+      this.content.scrollTop = 0;
+      this.tabs.scrollLeft = 0;
+    }, 0);
+
+    const id = this.sections.indexOf(section);
+    this.show(id);
   }
 
   _setSliderLine() {
