@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -62,6 +63,12 @@ module.exports = (env, arg) => {
     plugins: [
       new ExtractTextPlugin({
         filename: './css/tabs.css'
+      }),
+      new webpack.BannerPlugin({
+        banner: '@author ivan.kuzmichov@gmail.com\n' +
+                '@source https://github.com/k-ivan/tabs-slider\n' +
+                '@description Simple tabs slider in pure JavaScript\n' +
+                '@license MIT'
       })
     ]
   };

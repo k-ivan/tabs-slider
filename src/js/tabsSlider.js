@@ -1,13 +1,6 @@
 import './polyfill';
 import Helpers from './helpers';
 
-/**
- * @author ivan.kuzmichov@gmail.com
- * @source https://github.com/k-ivan/tabs-slider
- * @description Simple tabs slider in pure JavaScript
- * @license MIT
-*/
-
 export default class TabsSlider {
 
   constructor(elem, options) {
