@@ -65,6 +65,7 @@ module.exports = (env, arg) => {
         filename: './css/tabs.css'
       }),
       new webpack.BannerPlugin({
+        test: /\.js$/,
         banner: '@author ivan.kuzmichov@gmail.com\n' +
                 '@source https://github.com/k-ivan/tabs-slider\n' +
                 '@description Simple tabs slider in pure JavaScript\n' +
