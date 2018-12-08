@@ -16,7 +16,7 @@ Include the plugin styles
 ```
 Or If you use SASS, you can import a sass source
 ```scss
-@import 'tabs';
+@import './node_modules/tabs-slider/src/scss/tabs.scss';
 ```
 We also need a simple markup
 ```html
