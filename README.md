@@ -110,7 +110,7 @@ This method stops the plugin. To reinitialize, you need to call the constructor 
 Plugin provides an event for changing tabs
 ```js
 var elem = document.querySelector('.tabs');
-var tabs = new TabsSlider(tabs);
+var tabs = new TabsSlider(elem);
 
 elem.addEventListener('tabChange', function(evt) {
   console.log(evt.detail)
