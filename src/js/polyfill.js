@@ -1,33 +1,16 @@
-/* https://github.com/jonathantneal/closest */
-(function(ElementProto) {
-  if (typeof ElementProto.matches !== 'function') {
-    // eslint-disable-next-line
-    ElementProto.matches = ElementProto.msMatchesSelector || ElementProto.mozMatchesSelector || ElementProto.webkitMatchesSelector || function matches(selector) {
-      let element = this;
-      let elements = (element.document || element.ownerDocument).querySelectorAll(selector);
-      let index = 0;
+if (!Element.prototype.matches) {
+  Element.prototype.matches = Element.prototype.msMatchesSelector ||
+                              Element.prototype.webkitMatchesSelector;
+}
 
-      while (elements[index] && elements[index] !== element) {
-        ++index;
-      }
+if (!Element.prototype.closest) {
+  Element.prototype.closest = function(s) {
+    let el = this;
 
-      return Boolean(elements[index]);
-    };
-  }
-
-  if (typeof ElementProto.closest !== 'function') {
-    ElementProto.closest = function closest(selector) {
-      let element = this;
-
-      while (element && element.nodeType === 1) {
-        if (element.matches(selector)) {
-          return element;
-        }
-
-        element = element.parentNode;
-      }
-
-      return null;
-    };
-  }
-})(window.Element.prototype);
+    do {
+      if (el.matches(s)) return el;
+      el = el.parentElement || el.parentNode;
+    } while (el !== null && el.nodeType === 1);
+    return null;
+  };
+}
