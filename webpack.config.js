@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, arg) => {
   return {
@@ -18,28 +17,28 @@ module.exports = (env, arg) => {
     module: {
       rules: [
         {
-          test: /\.(sass|scss)$/,
-          include: path.resolve(__dirname, 'src/scss'),
-          use: ExtractTextPlugin.extract({
-            use: [{
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                minimize: true,
-                url: false
-              }
-            },
+          test: /\.(sa|sc)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
             {
-              loader: 'postcss-loader'
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [
+                  require('autoprefixer')
+                ]
+              }
             },
             {
               loader: 'sass-loader',
               options: {
+                outputStyle: 'expanded',
                 sourceMap: true
               }
             }
-            ]
-          })
+
+          ],
         },
         {
           test: /\.js$/,
@@ -61,7 +60,7 @@ module.exports = (env, arg) => {
     },
     devtool: arg.mode === 'development' ? 'eval-source-map' : false,
     plugins: [
-      new ExtractTextPlugin({
+      new MiniCssExtractPlugin({
         filename: './css/tabs.css'
       }),
       new webpack.BannerPlugin({

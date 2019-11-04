@@ -1,6 +1,6 @@
 {
   "name": "tabs-slider",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Easy to use tabs slider, written in pure JavaScript.",
   "main": "dist/js/tabsSlider.js",
   "scripts": {
@@ -29,12 +29,12 @@
     "babel-preset-stage-3": "^6.24.1",
     "css-loader": "^1.0.0",
     "eslint": "^5.2.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.9.2",
     "postcss-loader": "^2.1.6",
     "sass-loader": "^7.1.0",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.9.0"
   }
 }
