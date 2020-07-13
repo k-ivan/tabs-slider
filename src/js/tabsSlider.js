@@ -69,6 +69,10 @@ export default class TabsSlider {
       this.dragFlag = false;
     }
 
+    const passiveSupported = () => {
+      return (Helpers.passiveSupported) ? { passive: false } : false;
+    };
+    this.eventOptions = passiveSupported();
     this._addEvents();
     this.show(this.currentId);
   }
@@ -104,8 +108,9 @@ export default class TabsSlider {
       this.handlerLeave = this._leave.bind(this);
 
       const dragEvent = this.dragEvent.event();
-      this.content.addEventListener(dragEvent.start, this.handlerStart);
-      this.content.addEventListener(dragEvent.move, this.handlerMove);
+
+      this.content.addEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
+      this.content.addEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
       this.content.addEventListener(dragEvent.end, this.handlerEnd);
       this.content.addEventListener(dragEvent.leave, this.handlerLeave);
     }
@@ -118,8 +123,8 @@ export default class TabsSlider {
 
     if (this.settings.draggable) {
       const dragEvent = this.dragEvent.event();
-      this.content.removeEventListener(dragEvent.start, this.handlerStart);
-      this.content.removeEventListener(dragEvent.move, this.handlerMove);
+      this.content.removeEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
+      this.content.removeEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
       this.content.removeEventListener(dragEvent.end, this.handlerEnd);
       this.content.removeEventListener(dragEvent.leave, this.handlerLeave);
     }
