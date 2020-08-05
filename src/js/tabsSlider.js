@@ -46,6 +46,7 @@ export default class TabsSlider {
   }
 
   _init() {
+    this.tabsBarWrap = this.tabs.querySelector('.tabs__bar-wrap');
     this.bar = this.tabs.querySelector('.tabs__bar');
     this.content = this.tabs.querySelector('.tabs__content');
     this.controls = Array.prototype.slice.call(this.bar.querySelectorAll('.tabs__controls'));
@@ -53,6 +54,7 @@ export default class TabsSlider {
     this.offset = 0;
     this.currentId = this.settings.slide;
     this.slidesLen = this.sections.length;
+    this.tabsHasOverflow = false;
 
     this.transformProperty = Helpers.supportCSS3('transform');
     this.transitionProperty = Helpers.supportCSS3('transition');
@@ -74,6 +76,7 @@ export default class TabsSlider {
     };
     this.eventOptions = passiveSupported();
     this._addEvents();
+    this._checkTabsOverflow();
     this.show(this.currentId);
   }
 
@@ -92,14 +95,16 @@ export default class TabsSlider {
   }
 
   _addEvents() {
-    this.handlerClick = this._selectTab.bind(this);
-    this.handlerResize = this._responsive.bind(this);
+    this._handlerClick = this._selectTab.bind(this);
+    this._handlerResize = this._responsive.bind(this);
     this._handlerTabFocus = this._handlerTabFocus.bind(this);
+    this._handleTabOverflow = this._checkTabsOverflow.bind(this);
 
-    this.bar.addEventListener('click', this.handlerClick);
+    this.bar.addEventListener('click', this._handlerClick);
+    this.bar.addEventListener('scroll', this._handleTabOverflow);
     // Tab key focus inside slides
     this.content.addEventListener('focus', this._handlerTabFocus, true);
-    window.addEventListener('resize', this.handlerResize);
+    window.addEventListener('resize', this._handlerResize);
 
     if (this.settings.draggable) {
       this.handlerStart = this._start.bind(this);
@@ -117,9 +122,10 @@ export default class TabsSlider {
   }
 
   _removeEvents() {
-    this.bar.removeEventListener('click', this.handlerClick);
+    this.bar.removeEventListener('click', this._handlerClick);
+    this.bar.removeEventListener('scroll', this._handleTabOverflow);
     this.content.removeEventListener('focus', this._handlerTabFocus, true);
-    window.removeEventListener('resize', this.handlerResize);
+    window.removeEventListener('resize', this._handlerResize);
 
     if (this.settings.draggable) {
       const dragEvent = this.dragEvent.event();
@@ -158,11 +164,27 @@ export default class TabsSlider {
     this.bar.appendChild(this.line);
     this._moveSliderLine();
     if (this.settings.animate) {
-      // eslint-disable-next-line max-len
       this.line.style[this.transitionProperty] = `
         ${this.transformProperty} ${this.settings.duration}ms ${this.settings.easing}
       `;
     }
+  }
+
+  _scrollLeft(el, { to = 0, duration = 150 }, cb) {
+    const from = el.scrollLeft;
+    if (from === to) return cb && cb();
+
+    const start = Date.now();
+    const scroll = () => {
+      const currentTime = Date.now();
+      const time = Math.min(1, (currentTime - start) / duration);
+      el.scrollLeft = time * (to - from) + from;
+      if (time >= 1) {
+        return  cb && cb();
+      }
+      window.requestAnimationFrame(scroll);
+    };
+    window.requestAnimationFrame(scroll);
   }
 
   _moveSliderLine() {
@@ -170,6 +192,35 @@ export default class TabsSlider {
 
     let transformLine = (this.has3d) ? `translate3d(${offsetLeft}px, 0, 0)` : `translateX(${offsetLeft}px)`;
     this.line.style.transform = `${transformLine} scaleX(${offsetWidth / this.w})`;
+  }
+
+  _checkTabsOverflow() {
+    this.tabsHasOverflow = this.bar.offsetWidth < this.bar.scrollWidth;
+    const hasRightOverflow = this.tabsHasOverflow && this.bar.scrollWidth > this.bar.scrollLeft + this.bar.offsetWidth;
+    const hasLeftOverflow = this.bar.scrollLeft > 0;
+
+    this.tabsBarWrap.classList.toggle('has-right-overflow', hasRightOverflow);
+    this.tabsBarWrap.classList.toggle('has-left-overflow', hasLeftOverflow);
+  }
+
+  _observeTabInViewport() {
+    if (!this.tabsHasOverflow) return;
+
+    const elem = this.controls[this.currentId];
+    const {offsetWidth, offsetLeft} = elem;
+    let scrollTo = this.bar.scrollLeft;
+
+    if (offsetLeft <= this.bar.scrollLeft) {
+      scrollTo = offsetLeft;
+    } else if (offsetLeft + offsetWidth >= this.bar.scrollLeft + this.bar.offsetWidth) {
+      scrollTo = this.bar.scrollLeft + this.bar.offsetWidth - offsetWidth;
+    }
+
+    this._scrollLeft(this.bar, {
+      to: scrollTo
+    }, () => {
+      this._checkTabsOverflow();
+    });
   }
 
   _dimmensions() {
@@ -189,6 +240,7 @@ export default class TabsSlider {
 
     this.offset = -(this.w * this.currentId);
     this._moveSlide(this.offset, false);
+    this._checkTabsOverflow();
   }
 
   _selectTab(e) {
@@ -322,5 +374,7 @@ export default class TabsSlider {
       currentTab: this.controls[this.currentId]
     });
     this.tabs.dispatchEvent(event);
+
+    this._observeTabInViewport();
   }
 }

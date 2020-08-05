@@ -12,6 +12,43 @@ $tabs-color-primary: #4285f4;
     box-sizing: border-box;
   }
 }
+.tabs__bar-wrap {
+  position: relative;
+  &.has-left-overflow {
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      bottom: 0;
+      width: 30px;
+      pointer-events: none;
+    }
+  }
+  &.has-right-overflow {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      bottom: 0;
+      width: 30px;
+      pointer-events: none;
+    }
+  }
+  &.has-left-overflow {
+    &::before {
+      left: 0;
+      background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(255,255,255,.95) 100%);
+    }
+  }
+  &.has-right-overflow {
+    &::after {
+      right: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,255,255,.95) 100%);
+    }
+  }
+}
 .tabs__bar {
   position: relative;
   display: flex;
