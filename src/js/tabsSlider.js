@@ -255,7 +255,6 @@ export default class TabsSlider {
   }
 
   _moveSlide(offset, hasAnimate = true) {
-
     if (this.settings.animate) {
       let duration = hasAnimate ? this.settings.duration : 0;
       let style = [`${this.transformProperty} ${duration}ms ${this.settings.easing}`];
@@ -328,7 +327,7 @@ export default class TabsSlider {
 
     const swipeTo = this.delta < 0 ? this.currentId - 1 : this.currentId + 1;
 
-    if (Math.abs(this.delta) < 50 || (swipeTo > this.slidesLen - 1 || swipeTo < 0)) {
+    if (Math.abs(this.delta) < 20 || (swipeTo > this.slidesLen - 1 || swipeTo < 0)) {
       this.dragFlag = false;
       this._moveSlide(this.offset);
       return;

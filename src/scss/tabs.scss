@@ -113,8 +113,8 @@ $tabs-color-primary: #4285f4;
   will-change: transform, height;
 }
 .tabs__content.has-grab {
-  cursor: w-resize;
-  cursor: -webkit-grabbing;
+  cursor: grabbing;
+  user-select: none;
 }
 
 .tabs__section {
