@@ -21,10 +21,12 @@ Or If you use SASS, you can import a sass source
 We also need a simple markup
 ```html
 <div class="tabs">
-  <div class="tabs__bar">
-    <div class="tabs__controls">View</div>
-    <div class="tabs__controls">General</div>
-    <div class="tabs__controls">Advanced</div>
+  <div class="tabs__bar-wrap">
+    <div class="tabs__bar">
+      <div class="tabs__controls">View</div>
+      <div class="tabs__controls">General</div>
+      <div class="tabs__controls">Advanced</div>
+    </div>
   </div>
   <div class="tabs__content">
     <div class="tabs__section">
