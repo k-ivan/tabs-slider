@@ -122,10 +122,6 @@
 .tabs__content.has-grab {
   cursor: -webkit-grabbing;
   cursor: grabbing;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 .tabs__section {
