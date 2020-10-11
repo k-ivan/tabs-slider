@@ -32,8 +32,11 @@ export default class TabsSlider {
 
   get dragEvent() {
     return {
-      // eslint-disable-next-line
-      hasTouch: !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch),
+      hasTouch: !!(
+        'ontouchstart' in window ||
+        // eslint-disable-next-line no-undef
+        window.DocumentTouch && document instanceof DocumentTouch
+      ),
       event() {
         return {
           start: (this.hasTouch) ? 'touchstart' : 'mousedown',
