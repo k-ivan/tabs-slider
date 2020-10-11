@@ -69,6 +69,7 @@ export default class TabsSlider {
       this.delta;
       this.target;
       this.dragFlag = false;
+      this.isMoving = false;
     }
 
     const passiveSupported = () => {
@@ -300,25 +301,27 @@ export default class TabsSlider {
   _move(e) {
     if (!this.dragFlag) return;
 
-    let drag;
+    let drag = e;
     if (e.targetTouches) {
       if (e.targetTouches.length > 1 || this.target !== e.targetTouches[0].target) {
         return;
       }
       drag = e.targetTouches[0];
-    } else {
-      e.preventDefault();
-      drag = e;
     }
 
     const currentX = drag.pageX || drag.clientX;
     const currentY = drag.pageY || drag.clientY;
 
-    if (Math.abs(this.dragX - currentX) >= Math.abs(this.dragY - currentY)) {
+    if (!this.isMoving) {
+      this.isMoving = Math.abs(this.dragX - currentX) >= Math.abs(this.dragY - currentY);
+    }
+
+    if (this.isMoving) {
+      e.preventDefault();
       this.delta = (this.dragX - currentX) / 2;
       if (!this.settings.animate) return;
 
-      this._moveSlide(parseInt(this.offset, 10) - this.delta, false);
+      this._moveSlide(this.offset - this.delta, false);
     }
   }
 
@@ -326,6 +329,9 @@ export default class TabsSlider {
     if (!this.dragFlag) return;
 
     const swipeTo = this.delta < 0 ? this.currentId - 1 : this.currentId + 1;
+    this.isMoving = false;
+
+    this.content.classList.remove('has-grab');
 
     if (Math.abs(this.delta) < 20 || (swipeTo > this.slidesLen - 1 || swipeTo < 0)) {
       this.dragFlag = false;
@@ -335,7 +341,6 @@ export default class TabsSlider {
     this.dragFlag = false;
     this.target = null;
     this.show(swipeTo);
-    this.content.classList.remove('has-grab');
   }
 
   _leave() {
