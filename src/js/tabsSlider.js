@@ -39,7 +39,7 @@ export default class TabsSlider {
           start: (this.hasTouch) ? 'touchstart' : 'mousedown',
           move: (this.hasTouch) ? 'touchmove' : 'mousemove',
           end: (this.hasTouch) ? 'touchend' : 'mouseup',
-          leave: (this.hasTouch) ? 'touchleave' : 'mouseleave'
+          leave: 'mouseleave'
         };
       }
     };
