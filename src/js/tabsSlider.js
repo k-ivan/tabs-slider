@@ -70,6 +70,7 @@ export default class TabsSlider {
       this.target;
       this.dragFlag = false;
       this.isMoving = false;
+      this.preventClick = false;
     }
 
     const passiveSupported = () => {
@@ -112,6 +113,7 @@ export default class TabsSlider {
       this.handlerMove = this._move.bind(this);
       this.handlerEnd = this._end.bind(this);
       this.handlerLeave = this._leave.bind(this);
+      this.hadlerLink = this._click.bind(this);
 
       const dragEvent = this.dragEvent.event();
 
@@ -119,6 +121,7 @@ export default class TabsSlider {
       this.content.addEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
       this.content.addEventListener(dragEvent.end, this.handlerEnd);
       this.content.addEventListener(dragEvent.leave, this.handlerLeave);
+      this.content.addEventListener('click', this.handlerLink);
     }
   }
 
@@ -279,6 +282,13 @@ export default class TabsSlider {
     this.settings.underline && this._moveSliderLine();
   }
 
+  _click(e) {
+    if (this.preventClick) {
+      e.preventDefault();
+    }
+    this.preventClick = false;
+  }
+
   _start(e) {
     if (this.dragFlag) return;
 
@@ -288,6 +298,7 @@ export default class TabsSlider {
       drag = e.targetTouches[0];
     } else {
       drag = e;
+      e.preventDefault();
     }
 
     this.delta = 0;
@@ -307,6 +318,10 @@ export default class TabsSlider {
         return;
       }
       drag = e.targetTouches[0];
+    } else {
+      if (e.target.nodeName === 'A') {
+        this.preventClick = true;
+      }
     }
 
     const currentX = drag.pageX || drag.clientX;
@@ -347,6 +362,7 @@ export default class TabsSlider {
     if (this.dragFlag) {
       this._moveSlide(this.offset);
       this.dragFlag = false;
+      this.preventClick = false;
       this.content.classList.remove('has-grab');
     }
   }
