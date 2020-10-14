@@ -1,8 +1,13 @@
 {
   "name": "tabs-slider",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Easy to use tabs slider, written in pure JavaScript.",
   "main": "dist/js/tabsSlider.js",
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 10"
+  ],
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",

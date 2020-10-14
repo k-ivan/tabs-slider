@@ -46,6 +46,7 @@
 
 .tabs__bar {
   position: relative;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   background-color: #f9f9f9;
@@ -75,7 +76,8 @@
 }
 
 .tabs__controls {
-  flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
   min-width: 150px;
   display: block;
   padding: 20px 10px;
@@ -111,8 +113,10 @@
 
 .tabs__content {
   position: relative;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-start;
+  -ms-flex-align: start;
+      align-items: flex-start;
   width: calc(600px * 3);
   overflow-y: hidden;
   background-color: #fff;
