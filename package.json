@@ -1,6 +1,6 @@
 {
   "name": "tabs-slider",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Easy to use tabs slider, written in pure JavaScript.",
   "main": "dist/js/tabsSlider.js",
   "browserslist": [

@@ -6,6 +6,14 @@
 </p>
 Easy to use tabs slider, written in pure JavaScript.
 
+## Browser support
+* IE10+
+* Chrome 35+
+* Firefox 35+
+* Safari 9.1+
+* Android 5+
+* IOS 9+
+
 ## Demo
 [Codepen demo](https://codepen.io/k-ivan/full/XBEdep/)
 
