@@ -6,13 +6,15 @@
 </p>
 Easy to use tabs slider, written in pure JavaScript.
 
+## Please note:
+Version 3 only supports **modern browsers**. To support older browsers (including IE) please use version 2 ([v2 branch](https://github.com/k-ivan/tabs-slider/tree/v2))
+
 ## Browser support
-* IE10+
-* Chrome 35+
-* Firefox 35+
-* Safari 9.1+
-* Android 5+
-* IOS 9+
+* Chrome
+* Firefox
+* Safari
+* Android
+* IOS
 
 ## Demo
 [Codepen demo](https://codepen.io/k-ivan/full/XBEdep/)

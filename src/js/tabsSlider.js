@@ -1,6 +1,3 @@
-import './polyfill';
-import Helpers from './helpers';
-
 export default class TabsSlider {
 
   constructor(elem, options) {
@@ -30,23 +27,20 @@ export default class TabsSlider {
     this._init();
   }
 
-  get dragEvent() {
+  _dragEvent() {
+    const hasTouch = !!(
+      'ontouchstart' in window ||
+      // eslint-disable-next-line no-undef
+      window.DocumentTouch && document instanceof DocumentTouch
+    );
     return {
-      hasTouch: !!(
-        'ontouchstart' in window ||
-        // eslint-disable-next-line no-undef
-        window.DocumentTouch && document instanceof DocumentTouch
-      ),
-      event() {
-        return {
-          start: (this.hasTouch) ? 'touchstart' : 'mousedown',
-          move: (this.hasTouch) ? 'touchmove' : 'mousemove',
-          end: (this.hasTouch) ? 'touchend' : 'mouseup',
-          leave: 'mouseleave'
-        };
-      }
+      start: hasTouch ? 'touchstart' : 'mousedown',
+      move: hasTouch ? 'touchmove' : 'mousemove',
+      end: hasTouch ? 'touchend' : 'mouseup',
+      leave: 'mouseleave'
     };
   }
+
 
   _init() {
     this.tabsBarWrap = this.tabs.querySelector('.tabs__bar-wrap');
@@ -59,9 +53,8 @@ export default class TabsSlider {
     this.slidesLen = this.sections.length;
     this.tabsHasOverflow = false;
 
-    this.transformProperty = Helpers.supportCSS3('transform');
-    this.transitionProperty = Helpers.supportCSS3('transition');
-    this.has3d = Helpers.support3d();
+    this.transformProperty = 'transform';
+    this.transitionProperty = 'transition';
 
     this._dimmensions();
     this.settings.underline && this._setSliderLine();
@@ -76,10 +69,6 @@ export default class TabsSlider {
       this.preventClick = false;
     }
 
-    const passiveSupported = () => {
-      return (Helpers.passiveSupported) ? { passive: false } : false;
-    };
-    this.eventOptions = passiveSupported();
     this._addEvents();
     this._checkTabsOverflow();
     this.show(this.currentId);
@@ -118,10 +107,11 @@ export default class TabsSlider {
       this.handlerLeave = this._leave.bind(this);
       this.hadlerLink = this._click.bind(this);
 
-      const dragEvent = this.dragEvent.event();
+      // const dragEvent = this.dragEvent.event();
+      const dragEvent = this._dragEvent();
 
-      this.content.addEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
-      this.content.addEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
+      this.content.addEventListener(dragEvent.start, this.handlerStart, { passive: false });
+      this.content.addEventListener(dragEvent.move, this.handlerMove, { passive: false });
       this.content.addEventListener(dragEvent.end, this.handlerEnd);
       this.content.addEventListener(dragEvent.leave, this.handlerLeave);
       this.content.addEventListener('click', this.handlerLink);
@@ -136,8 +126,8 @@ export default class TabsSlider {
 
     if (this.settings.draggable) {
       const dragEvent = this.dragEvent.event();
-      this.content.removeEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
-      this.content.removeEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
+      this.content.removeEventListener(dragEvent.start, this.handlerStart, { passive: false });
+      this.content.removeEventListener(dragEvent.move, this.handlerMove, { passive: false });
       this.content.removeEventListener(dragEvent.end, this.handlerEnd);
       this.content.removeEventListener(dragEvent.leave, this.handlerLeave);
     }
@@ -197,7 +187,7 @@ export default class TabsSlider {
   _moveSliderLine() {
     const {offsetWidth, offsetLeft} = this.controls[this.currentId];
 
-    let transformLine = (this.has3d) ? `translate3d(${offsetLeft}px, 0, 0)` : `translateX(${offsetLeft}px)`;
+    let transformLine = `translate3d(${offsetLeft}px, 0, 0)`;
     this.line.style.transform = `${transformLine} scaleX(${offsetWidth / this.w})`;
   }
 
@@ -273,11 +263,7 @@ export default class TabsSlider {
       this.content.style[this.transitionProperty] = style.join(',');
     }
 
-    if (this.has3d) {
-      this.content.style[this.transformProperty] = `translate3d(${offset}px, 0, 0)`;
-    } else {
-      this.content.style[this.transformProperty] = `translateX(${offset}px)`;
-    }
+    this.content.style[this.transformProperty] = `translate3d(${offset}px, 0, 0)`;
 
     const h = this.sections[this.currentId].offsetHeight;
     this.content.style['height'] = `${h}px`;
@@ -389,12 +375,13 @@ export default class TabsSlider {
     this._moveSlide(this.offset);
     this.controls[this.currentId].classList.add('is-active');
 
-    const event = document.createEvent('CustomEvent');
-    event.initCustomEvent('tabChange', true, true, {
-      currentIndex: this.currentId,
-      prevIndex: prevIndex,
-      currentSlide: this.sections[this.currentId],
-      currentTab: this.controls[this.currentId]
+    const event = new CustomEvent('tabChange', {
+      detail: {
+        currentIndex: this.currentId,
+        prevIndex: prevIndex,
+        currentSlide: this.sections[this.currentId],
+        currentTab: this.controls[this.currentId]
+      }
     });
     this.tabs.dispatchEvent(event);
 
