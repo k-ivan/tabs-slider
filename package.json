@@ -1,12 +1,12 @@
 {
   "name": "tabs-slider",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Easy to use tabs slider, written in pure JavaScript.",
   "main": "dist/js/tabsSlider.js",
   "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "IE 10"
+    "last 3 versions and > 0.2%",
+    "not dead",
+    "not IE 11"
   ],
   "scripts": {
     "dev": "webpack --mode development",
@@ -25,21 +25,19 @@
     "url": "https://github.com/k-ivan/tabs-slider/issues"
   },
   "devDependencies": {
-    "autoprefixer": "^9.0.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-add-module-exports": "^0.3.2",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
+    "@babel/core": "^7.12.0",
+    "@babel/plugin-transform-object-assign": "^7.10.4",
+    "@babel/preset-env": "^7.12.0",
+    "autoprefixer": "^9.4.4",
+    "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
     "eslint": "^5.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^2.1.6",
     "sass-loader": "^7.1.0",
-    "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.9.0"
   }
 }

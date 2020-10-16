@@ -12,6 +12,7 @@ module.exports = (env, arg) => {
       filename: './js/tabsSlider.js',
       library: 'TabsSlider',
       libraryTarget: 'umd',
+      libraryExport: 'default',
       umdNamedDefine: true
     },
     module: {
@@ -44,10 +45,7 @@ module.exports = (env, arg) => {
           test: /\.js$/,
           include: path.resolve(__dirname, 'src/js'),
           use: {
-            loader: 'babel-loader',
-            options: {
-              presets: 'env'
-            }
+            loader: 'babel-loader'
           }
         }
       ]

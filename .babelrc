@@ -1,9 +1,8 @@
 {
   "presets": [
-    "env", "stage-3"
+    "@babel/env"
   ],
   "plugins": [
-    "transform-object-assign",
-    "add-module-exports"
+    "@babel/plugin-transform-object-assign"
   ]
 }

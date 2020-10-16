@@ -3,13 +3,11 @@
   margin: auto;
   margin-bottom: 20px;
   overflow: hidden;
-  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 }
 
 .tabs * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .tabs__bar-wrap {
@@ -38,26 +36,21 @@
 
 .tabs__bar-wrap.has-left-overflow::before {
   left: 0;
-  background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.95)));
   background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 100%);
 }
 
 .tabs__bar-wrap.has-right-overflow::after {
   right: 0;
-  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.95)));
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 100%);
 }
 
 .tabs__bar {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   background-color: #f9f9f9;
   border-radius: 3px 3px 0 0;
-  -webkit-box-shadow: inset 0 -5px 5px -3px rgba(0, 0, 0, 0.05);
-          box-shadow: inset 0 -5px 5px -3px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 -5px 5px -3px rgba(0, 0, 0, 0.05);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -77,14 +70,11 @@
   height: 3px;
   background-color: #4285f4;
   will-change: transform;
-  -webkit-transform-origin: left;
-          transform-origin: left;
+  transform-origin: left;
 }
 
 .tabs__controls {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+  flex: 1 0 auto;
   min-width: 150px;
   display: block;
   padding: 20px 10px;
@@ -113,19 +103,13 @@
 
 .tabs__controls:active {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
 .tabs__content {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  align-items: flex-start;
   width: calc(600px * 3);
   overflow-y: hidden;
   background-color: #fff;
