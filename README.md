@@ -6,6 +6,9 @@
 </p>
 Easy to use tabs slider, written in pure JavaScript.
 
+## Please note:
+Version 2 with support for older browsers [list of supported browsers](#browser-support)
+
 ## Browser support
 * IE10+
 * Chrome 35+
@@ -56,7 +59,7 @@ Add the plugin to the page
 ```
 or if you are using a module bundler
 ```sh
-npm i tabs-slider
+npm i tabs-slider@2.0.6
 ```
 ```js
 import TabsSlider from 'tabs-slider';
