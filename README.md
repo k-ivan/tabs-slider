@@ -1,6 +1,7 @@
 # Tabs
 <p>
   <a href="https://www.npmjs.com/package/tabs-slider"><img src="https://img.shields.io/npm/v/tabs-slider.svg"></a>
+  <a href="https://www.npmjs.com/package/tabs-slider"><img src="https://img.shields.io/bundlephobia/min/tabs-slider.svg"></a>
   <a href="https://www.npmjs.com/package/tabs-slider"><img src="https://img.shields.io/npm/l/tabs-slider.svg"></a>
   <a href="https://www.npmjs.com/package/tabs-slider"><img src="https://img.shields.io/npm/dt/tabs-slider.svg"></a>
 </p>

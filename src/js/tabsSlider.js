@@ -1,5 +1,4 @@
 export default class TabsSlider {
-
   constructor(elem, options) {
     if (typeof elem === 'string') {
       elem = document.querySelector(elem);
@@ -40,7 +39,6 @@ export default class TabsSlider {
       leave: 'mouseleave'
     };
   }
-
 
   _init() {
     this.tabsBarWrap = this.tabs.querySelector('.tabs__bar-wrap');
@@ -105,15 +103,14 @@ export default class TabsSlider {
       this.handlerMove = this._move.bind(this);
       this.handlerEnd = this._end.bind(this);
       this.handlerLeave = this._leave.bind(this);
-      this.hadlerLink = this._click.bind(this);
+      this.handlerLink = this._click.bind(this);
 
-      // const dragEvent = this.dragEvent.event();
-      const dragEvent = this._dragEvent();
+      this.dragEvent = this._dragEvent();
 
-      this.content.addEventListener(dragEvent.start, this.handlerStart, { passive: false });
-      this.content.addEventListener(dragEvent.move, this.handlerMove, { passive: false });
-      this.content.addEventListener(dragEvent.end, this.handlerEnd);
-      this.content.addEventListener(dragEvent.leave, this.handlerLeave);
+      this.content.addEventListener(this.dragEvent.start, this.handlerStart, { passive: false });
+      this.content.addEventListener(this.dragEvent.move, this.handlerMove, { passive: false });
+      this.content.addEventListener(this.dragEvent.end, this.handlerEnd);
+      this.content.addEventListener(this.dragEvent.leave, this.handlerLeave);
       this.content.addEventListener('click', this.handlerLink);
     }
   }
@@ -125,11 +122,11 @@ export default class TabsSlider {
     window.removeEventListener('resize', this._handlerResize);
 
     if (this.settings.draggable) {
-      const dragEvent = this.dragEvent.event();
-      this.content.removeEventListener(dragEvent.start, this.handlerStart, { passive: false });
-      this.content.removeEventListener(dragEvent.move, this.handlerMove, { passive: false });
-      this.content.removeEventListener(dragEvent.end, this.handlerEnd);
-      this.content.removeEventListener(dragEvent.leave, this.handlerLeave);
+      this.content.removeEventListener(this.dragEvent.start, this.handlerStart, { passive: false });
+      this.content.removeEventListener(this.dragEvent.move, this.handlerMove, { passive: false });
+      this.content.removeEventListener(this.dragEvent.end, this.handlerEnd);
+      this.content.removeEventListener(this.dragEvent.leave, this.handlerLeave);
+      this.content.removeEventListener('click', this.handlerLink);
     }
   }
 
