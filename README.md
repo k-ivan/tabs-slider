@@ -7,7 +7,7 @@
 Easy to use tabs slider, written in pure JavaScript.
 
 ## Please note:
-Version 2 with support for older browsers [list of supported browsers](#browser-support)
+Version 2 with support for older browsers [list of supported browsers](#browser-support). If support for older browsers is not needed, please use [latest version](https://github.com/k-ivan/tabs-slider).
 
 ## Browser support
 * IE10+
@@ -59,7 +59,7 @@ Add the plugin to the page
 ```
 or if you are using a module bundler
 ```sh
-npm i tabs-slider@2.0.6
+npm i tabs-slider@2
 ```
 ```js
 import TabsSlider from 'tabs-slider';

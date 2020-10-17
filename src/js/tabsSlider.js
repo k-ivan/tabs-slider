@@ -30,21 +30,17 @@ export default class TabsSlider {
     this._init();
   }
 
-  get dragEvent() {
+  _dragEvent() {
+    const hasTouch = !!(
+      'ontouchstart' in window ||
+      // eslint-disable-next-line no-undef
+      window.DocumentTouch && document instanceof DocumentTouch
+    );
     return {
-      hasTouch: !!(
-        'ontouchstart' in window ||
-        // eslint-disable-next-line no-undef
-        window.DocumentTouch && document instanceof DocumentTouch
-      ),
-      event() {
-        return {
-          start: (this.hasTouch) ? 'touchstart' : 'mousedown',
-          move: (this.hasTouch) ? 'touchmove' : 'mousemove',
-          end: (this.hasTouch) ? 'touchend' : 'mouseup',
-          leave: 'mouseleave'
-        };
-      }
+      start: hasTouch ? 'touchstart' : 'mousedown',
+      move: hasTouch ? 'touchmove' : 'mousemove',
+      end: hasTouch ? 'touchend' : 'mouseup',
+      leave: 'mouseleave'
     };
   }
 
@@ -116,14 +112,14 @@ export default class TabsSlider {
       this.handlerMove = this._move.bind(this);
       this.handlerEnd = this._end.bind(this);
       this.handlerLeave = this._leave.bind(this);
-      this.hadlerLink = this._click.bind(this);
+      this.handlerLink = this._click.bind(this);
 
-      const dragEvent = this.dragEvent.event();
+      this.dragEvent = this._dragEvent();
 
-      this.content.addEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
-      this.content.addEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
-      this.content.addEventListener(dragEvent.end, this.handlerEnd);
-      this.content.addEventListener(dragEvent.leave, this.handlerLeave);
+      this.content.addEventListener(this.dragEvent.start, this.handlerStart, this.eventOptions);
+      this.content.addEventListener(this.dragEvent.move, this.handlerMove, this.eventOptions);
+      this.content.addEventListener(this.dragEvent.end, this.handlerEnd);
+      this.content.addEventListener(this.dragEvent.leave, this.handlerLeave);
       this.content.addEventListener('click', this.handlerLink);
     }
   }
@@ -135,11 +131,11 @@ export default class TabsSlider {
     window.removeEventListener('resize', this._handlerResize);
 
     if (this.settings.draggable) {
-      const dragEvent = this.dragEvent.event();
-      this.content.removeEventListener(dragEvent.start, this.handlerStart, this.eventOptions);
-      this.content.removeEventListener(dragEvent.move, this.handlerMove, this.eventOptions);
-      this.content.removeEventListener(dragEvent.end, this.handlerEnd);
-      this.content.removeEventListener(dragEvent.leave, this.handlerLeave);
+      this.content.removeEventListener(this.dragEvent.start, this.handlerStart, this.eventOptions);
+      this.content.removeEventListener(this.dragEvent.move, this.handlerMove, this.eventOptions);
+      this.content.removeEventListener(this.dragEvent.end, this.handlerEnd);
+      this.content.removeEventListener(this.dragEvent.leave, this.handlerLeave);
+      this.content.removeEventListener('click', this.handlerLink);
     }
   }
 
