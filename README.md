@@ -17,6 +17,11 @@ Version 3 only supports **modern browsers**. To support older browsers (includin
 * Android
 * IOS
 
+Thanks to [Browserstack](https://www.browserstack.com) for providing a free license, so we can start automating test in different browsers and devices.  
+<a href="https://www.browserstack.com">
+  <img src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png" alt="Browserstack" width="150">
+</a>
+
 ## Demo
 [Codepen demo](https://codepen.io/k-ivan/full/XBEdep/)
 
