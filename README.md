@@ -17,7 +17,7 @@ Version 3 only supports **modern browsers**. To support older browsers (includin
 * Android
 * IOS
 
-Thanks to [Browserstack](https://www.browserstack.com) for providing a free license, so we can start automating test in different browsers and devices.  
+Thanks to [Browserstack](https://www.browserstack.com) for providing a free license, so we can start automating test in different browsers and devices.
 <a href="https://www.browserstack.com">
   <img src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png" alt="Browserstack" width="150">
 </a>
@@ -58,6 +58,17 @@ We also need a simple markup
   </div>
 </div>
 ```
+If you need the direction of flow from right to left, you must specify attribute `dir`
+```html
+<div class="tabs" dir="rtl">
+```
+and add an option when plugin initialization
+```js
+new TabsSlider('.tabs', {
+  rtl: true
+});
+```
+
 Add the plugin to the page
 ```html
 <script src="js/tabsSlider.js"></script>
@@ -81,6 +92,7 @@ But we can also use advanced plugin options. Available options and their default
 new TabsSlider(elem, {
   animate: true,
   slide: 0,
+  rtl: false,
   draggable: true,
   underline: true,
   heightAnimate: true,
@@ -94,6 +106,9 @@ new TabsSlider(elem, {
 
 `animate` (bool)
   animated tabs switching
+
+`rtl` (bool)
+  base direction
 
 `slide` (integer)
   initial slide

@@ -117,7 +117,6 @@
 }
 
 .tabs__content.has-grab {
-  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 

@@ -16,6 +16,7 @@ export default class TabsSlider {
     this.settings = Object.assign({
       animate: true,
       slide: 0,
+      rtl: false,
       draggable: true,
       underline: true,
       heightAnimate: true,
@@ -50,6 +51,7 @@ export default class TabsSlider {
     this.currentId = this.settings.slide;
     this.slidesLen = this.sections.length;
     this.tabsHasOverflow = false;
+    this.rtl = this.settings.rtl ? 1 : -1;
 
     this.transformProperty = 'transform';
     this.transitionProperty = 'transition';
@@ -232,7 +234,7 @@ export default class TabsSlider {
   _responsive() {
     this._dimmensions();
 
-    this.offset = -(this.w * this.currentId);
+    this.offset = this.rtl * (this.w * this.currentId);
     this._moveSlide(this.offset, false);
     this._checkTabsOverflow();
   }
@@ -326,10 +328,17 @@ export default class TabsSlider {
     }
   }
 
+  _swipeTo() {
+    if (this.settings.rtl) {
+      return this.delta > 0 ? this.currentId - 1 : this.currentId + 1;
+    }
+    return this.delta < 0 ? this.currentId - 1 : this.currentId + 1;
+  }
+
   _end() {
     if (!this.dragFlag) return;
 
-    const swipeTo = this.delta < 0 ? this.currentId - 1 : this.currentId + 1;
+    const swipeTo = this._swipeTo();
     this.isMoving = false;
 
     this.content.classList.remove('has-grab');
@@ -368,7 +377,7 @@ export default class TabsSlider {
 
     const prevIndex = this.currentId;
     this.currentId = slide;
-    this.offset = -(this.w * this.currentId);
+    this.offset = this.rtl * (this.w * this.currentId);
     this._moveSlide(this.offset);
     this.controls[this.currentId].classList.add('is-active');
 
