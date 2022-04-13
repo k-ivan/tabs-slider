@@ -1,8 +1,11 @@
 {
   "presets": [
-    "@babel/env"
-  ],
-  "plugins": [
-    "@babel/plugin-transform-object-assign"
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "loose": true
+      }
+    ]
   ]
 }

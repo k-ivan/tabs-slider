@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, arg) => {
   return {
@@ -9,6 +10,7 @@ module.exports = (env, arg) => {
       './src/js/tabsSlider.js'
     ],
     output: {
+      clean: true,
       filename: './js/tabsSlider.js',
       library: 'TabsSlider',
       libraryTarget: 'umd',
@@ -25,17 +27,20 @@ module.exports = (env, arg) => {
             {
               loader: 'postcss-loader',
               options: {
-                ident: 'postcss',
-                plugins: [
-                  require('autoprefixer')
-                ]
+                postcssOptions: {
+                  plugins: [
+                    require('autoprefixer')
+                  ]
+                }
               }
             },
             {
               loader: 'sass-loader',
               options: {
-                outputStyle: 'expanded',
-                sourceMap: true
+                sassOptions: {
+                  outputStyle: 'expanded',
+                  sourceMap: true
+                }
               }
             }
 
@@ -51,15 +56,24 @@ module.exports = (env, arg) => {
       ]
     },
     devServer: {
-      contentBase: path.join(__dirname, 'dist'),
+      static: path.join(__dirname, 'dist'),
       compress: true,
-      overlay: true,
-      port: 8080
+      port: 8080,
+      watchFiles: ['src/demo/index.html'],
+      client: {
+        overlay: true
+      }
     },
     devtool: arg.mode === 'development' ? 'eval-source-map' : false,
     plugins: [
       new MiniCssExtractPlugin({
         filename: './css/tabs.css'
+      }),
+      new HtmlWebpackPlugin({
+        template: `./src/demo/index.html`,
+        minify: false,
+        inject: false,
+        scriptLoading: 'blocking'
       }),
       new webpack.BannerPlugin({
         test: /\.js$/,
